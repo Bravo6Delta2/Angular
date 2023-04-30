@@ -55,7 +55,7 @@ export class LoginComponent {
         let resT = res as Res
         if (resT.message == "Logged in" && resT.token != undefined) {
           localStorage.setItem("token", resT.token)
-          this.toast.success(resT.message).onShown.subscribe( pp => {
+          this.toast.success(resT.message).onShown.subscribe( () => {
             this.router.navigate(['/'])
           })
 
