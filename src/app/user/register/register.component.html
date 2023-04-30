@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="flex h-screen justify-center items-center">
+  <div class="rounded-md border-2 border-slate-900 shadow-2xl w-96">
+    <div class="text-3xl bg-slate-900 rounded-t-md p-4">Register</div>
+    <div class="flex flex-col pt-4 items-center bg-slate-700 rounded-b-md">
+      <div>
+        Email: <br/>
+        <input type="text" class="w-64 input inputNormal"
+               [(ngModel)]="state.email"
+               [ngClass]="{'inputNormal': formOk.email == 0,'inputOk': formOk.email == 1, 'inputError': formOk.email == 2}" />
+      </div>
+      <div class="mt-4">
+        Password: <br/>
+        <input type="password" class="w-64 input inputNormal"
+               [(ngModel)]="state.password"
+               [ngClass]="{'inputNormal': formOk.password == 0,'inputOk': formOk.password == 1, 'inputError': formOk.password == 2}" />
+      </div>
+      <div class="flex flex-row">
+        <div class="mt-4">
+          First Name: <br/>
+          <input type="text" class="w-28 input inputNormal"
+                 [(ngModel)]="state.firstName"
+                 [ngClass]="{'inputNormal': formOk.firstName == 0,'inputOk': formOk.firstName == 1, 'inputError': formOk.firstName == 2}" />
+        </div>
+        <div class="mt-4 ml-8">
+          Last Name: <br/>
+          <input type="text" class="w-28 input inputNormal"
+                 [(ngModel)]="state.lastName"
+                 [ngClass]="{'inputNormal': formOk.lastName == 0,'inputOk': formOk.lastName == 1, 'inputError': formOk.lastName == 2}" />
+        </div>
+      </div>
+
+      <div class="mt-4">
+        Phone Number: <br/>
+        <input type="text" class="w-64 input"
+               [ngClass]="{'inputNormal': formOk.phoneNumber == 0,'inputOk': formOk.phoneNumber == 1, 'inputError': formOk.phoneNumber == 2}"
+               [(ngModel)]="state.phoneNumber"/>
+      </div>
+
+      <button class="mt-4 mb-4 bg-slate-600 pl-8 pr-8 pt-1 pb-1 rounded" (click)="process()">Register</button>
+    </div>
+  </div>
+</div>

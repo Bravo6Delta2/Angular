@@ -7,18 +7,27 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {AdminModule} from "./admin/admin.module";
 import {UserModule} from "./user/user.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    UserModule
+    UserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+    }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

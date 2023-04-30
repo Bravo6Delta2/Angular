@@ -7,9 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CarsComponent } from './cars/cars.component';
 import { CarComponent } from './car/car.component';
-import { ProfilComponent } from './profil/profil.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import {FormsModule} from "@angular/forms";
+import { CarCardComponent } from './car-card/car-card.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +18,17 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     CarsComponent,
     CarComponent,
-    ProfilComponent,
-    ProfileComponent
+    ProfileComponent,
+    CarCardComponent
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
-  ]
+    UserRoutingModule,
+    FormsModule,
+  ],
+  providers: [
+
+  ],
+
 })
 export class UserModule { }
