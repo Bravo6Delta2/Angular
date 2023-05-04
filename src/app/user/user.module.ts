@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -10,6 +10,7 @@ import { CarComponent } from './car/car.component';
 import { ProfileComponent } from './profile/profile.component';
 import {FormsModule} from "@angular/forms";
 import { CarCardComponent } from './car-card/car-card.component';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,13 @@ import { CarCardComponent } from './car-card/car-card.component';
     ProfileComponent,
     CarCardComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        NgOptimizedImage,
+        CalendarModule
+    ],
   providers: [
 
   ],

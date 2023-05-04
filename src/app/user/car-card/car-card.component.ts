@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
 interface Car {
-  _id: string,
+  _id: string
   plateNumber: string
   model: string
   manufacturer: string
   year: number
-  color:string
-  price:number
+  color: string
+  price: number
   type: string
   images: [string]
 }
