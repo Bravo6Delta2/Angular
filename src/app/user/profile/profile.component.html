@@ -1,1 +1,51 @@
+<div class="min-h-screen">
 
+  <div *ngIf="state == 0">
+    Loading...
+  </div>
+
+  <div *ngIf="state == 1" class="flex flex-row min-h-full">
+
+    <div class="flex flex-col bg-slate-700 pt-10 pl-4 pr-4 pb-5 min-h-screen drop-shadow-xl">
+      <div class="text-2xl">{{this.user.firstName}} {{this.user.lastName}}</div>
+      <div class="text-md">email: {{this.user.email}}</div>
+      <div class="text-md">phoneNumber: {{this.user.phoneNumber}}</div>
+    </div>
+
+    <div class="pl-32 flex flex-col items-center">
+      <div class="mt-5 text-3xl">Yor Rents</div>
+      <table class="mt-5 table-fixed border-collapse border border-slate-900">
+        <thead>
+        <tr class="bg-slate-900">
+          <th class="cell">Rent Id</th>
+          <th class="cell">Car Id</th>
+          <th class="cell">Date Start</th>
+          <th class="cell">Date End</th>
+          <th class="cell">Price</th>
+        </tr>
+        </thead>
+        <tbody class="bg-slate-700">
+        <tr *ngFor="let rent of rents">
+          <td class="cell">{{rent._id}}</td>
+          <td class="cell">{{rent.carId}}</td>
+          <td class="cell">{{rent.start.toString().split("T")[0]}}</td>
+          <td class="cell">{{rent.end.toString().split("T")[0]}}</td>
+          <td class="cell">{{rent.price}}</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="pr-5">Total: {{this.total}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+</div>
