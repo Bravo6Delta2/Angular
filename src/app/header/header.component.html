@@ -9,6 +9,7 @@
     <div><a routerLink="/cars">Cars</a></div>
   </div>
 
-  <div class="text-2xl me-5"><a routerLink="/login">Login</a></div>
+  <div *ngIf="state == 0" class="text-2xl me-5"><a routerLink="/login">Login</a></div>
+  <div *ngIf="state == 1" class="text-2xl me-5"><a routerLink="/profile">Profile</a></div>
 
 </div>
