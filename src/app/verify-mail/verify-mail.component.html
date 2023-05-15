@@ -1,0 +1,15 @@
+<div class="min-h-screen flex justify-center">
+  <div *ngIf="state == 0" class="pt-60"> Loading... </div>
+  <div *ngIf="state == 1" class="flex flex-row justify-center items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#22C55E" class="w-24 h-24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+    <span class="text-6xl text-green-500">Account is activated</span>
+  </div>
+  <div *ngIf="state == 2" class="flex flex-row justify-center items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#F43F5E" class="w-24 h-24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    <span class="text-6xl text-rose-500">Invalid token</span>
+  </div>
+</div>
