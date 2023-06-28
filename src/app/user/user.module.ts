@@ -11,6 +11,8 @@ import { ProfileComponent } from './profile/profile.component';
 import {FormsModule} from "@angular/forms";
 import { CarCardComponent } from './car-card/car-card.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import {BarChartModule, LineChartModule, PieChartModule} from "@swimlane/ngx-charts";
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -20,15 +22,19 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
     CarsComponent,
     CarComponent,
     ProfileComponent,
-    CarCardComponent
+    CarCardComponent,
+    NewsComponent
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        FormsModule,
-        NgOptimizedImage,
-        CalendarModule
-    ],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    FormsModule,
+    NgOptimizedImage,
+    CalendarModule,
+    LineChartModule,
+    BarChartModule,
+    PieChartModule
+  ],
   providers: [
 
   ],

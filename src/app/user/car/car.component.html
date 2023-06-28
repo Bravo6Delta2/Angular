@@ -2,60 +2,54 @@
 
   <div *ngIf="state == 0"> Loading </div>
 
-  <div *ngIf="state != 0">
-
-
-    <div class="relative left-40 w-96 z-0 mt-20">
-      <!-- Carousel wrapper -->
-      <div class="relative left-96 overflow-hidden rounded-t-lg h-60 border-2 border-slate-900">
-        <!-- Item 1 -->
-
-        <div *ngFor="let img of this.car!.images; let i = index" [ngClass]="{'hidden': this.picture != i, 'block': this.picture == i}">
-          <img src="http:\\localhost:3001\{{img}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-
-      <!-- Slider controls -->
-      <button (click)="prev()"  type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            <span class="sr-only">Previous</span>
-        </span>
-      </button>
-      <button (click)="next()" type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            <span class="sr-only">Next</span>
-        </span>
-      </button>
-
+  <div *ngIf="state != 0" class="flex justify-center">
+    <div class="pt-5">
+      <h1 class="text-2xl self-center"> {{this.id?.description}} {{this.data?.c}}$</h1>
     </div>
-      <div class="relative left-96 w-96 bg-slate-900 border-2 border-slate-900 rounded-b-lg">
-        <div class="text-2xl pl-3 pt-2 pb-2">
-          {{this.car!.manufacturer}} {{this.car!.model}}
-        </div>
-        <div class="flex flex-col text-xl bg-slate-700 pl-10 rounded-b-lg pt-4 pb-4">
-          <div class="pb-3"> Year: {{this.car?.year}} </div>
-          <div class="pb-3"> Type: {{this.car?.type}} </div>
-          <div class="pb-3"> Price: {{this.car?.price}} $ </div>
-
-          <div class="mb-3">
-            Start date: <br/>
-            <input  [ngModel] ="start | date:'yyyy-MM-dd'" (ngModelChange)="start = $event" class="w-48 input" type="date"  />
-          </div>
-          <div class="mb-3">
-            End date: <br/>
-            <input [ngModel] ="end | date:'yyyy-MM-dd'" (ngModelChange)="end = $event" class="w-48 input" type="date" />
-          </div>
-
-          <button (click)="rent()" class="w-32 bg-slate-600 pl-8 pr-8 pt-1 pb-1 rounded">Rent</button>
-
-        </div>
-
-
-      </div>
-
   </div>
 
+  <div class="flex justify-center items-center pt-10">
+    <button (click)="d1()" class="mr-10 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-600 border border-slate-300 rounded-lg">
+      1D
+    </button>
+    <button (click)="d5()" class="mr-10 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-600 border border-slate-300 rounded-lg">
+      5D
+    </button>
+    <button (click)="m1()" class="mr-10 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-600 border border-slate-300 rounded-lg">
+      1M
+    </button>
+    <button (click)="m6()" class="mr-10 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-600 border border-slate-300 rounded-lg">
+      6M
+    </button>
+    <button (click)="y1()" class="mr-10 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-600 border border-slate-300 rounded-lg">
+      1Y
+    </button>
+  </div>
+
+  <div *ngIf="state1 == 1" class="flex justify-center pt-10">
+    <ngx-charts-line-chart
+      [view]="view"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="multi"
+    >
+    </ngx-charts-line-chart>
+  </div>
+
+  <div class="flex flex-col items-center">
+    <div class="m-4 flex flex-col">
+      Number of stocks: <br/>
+      <input  [(ngModel)]="numberOfStocks" class="w-48 input" type="number" placeholder="Stock Name"/>
+    </div>
+    <div>
+      <button (click)="buy()" class=" mt-2 mb-12 bg-slate-600 pt-2 pb-2 pl-8 pr-8 rounded">Buy</button>
+    </div>
   </div>
 
 </div>

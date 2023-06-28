@@ -1,14 +1,9 @@
 import {Component, Input} from '@angular/core';
 interface Car {
-  _id: string
-  plateNumber: string
-  model: string
-  manufacturer: string
-  year: number
-  color: string
-  price: number
+  description: string
+  displaySymbol: string
+  symbol: string
   type: string
-  images: [string]
 }
 
 @Component({
@@ -20,4 +15,5 @@ export class CarCardComponent {
   @Input() data!: Car;
   constructor() { }
 
+  protected readonly JSON = JSON;
 }

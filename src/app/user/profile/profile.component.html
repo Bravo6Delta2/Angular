@@ -8,41 +8,88 @@
 
     <div class="flex flex-col bg-slate-700 pt-10 pl-4 pr-4 pb-5 min-h-screen drop-shadow-xl">
       <div class="text-2xl">{{this.user.firstName}} {{this.user.lastName}}</div>
-      <div class="text-md">email: {{this.user.email}}</div>
-      <div class="text-md">phoneNumber: {{this.user.phoneNumber}}</div>
+
+      <div class="text-md">email: </div>
+      <div class="text-md">{{this.user.email}}</div>
+
+      <div class="text-md">phoneNumber: </div>
+      <div class="text-md">{{this.user.phoneNumber}}</div>
+
+      <div class="text-md">Money: </div>
+      <div class="text-md">{{this.user.money}}</div>
     </div>
 
-    <div class="pl-32 flex flex-col items-center">
-      <div class="mt-5 text-3xl">Yor Rents</div>
+    <div class="pl-8 flex flex-col items-center">
+      <div class="text-3xl pt-3">Portfolio</div>
+      <div class="flex justify-center">
+        <ngx-charts-advanced-pie-chart
+          [view]="view"
+          [results]="multi1"
+        >
+        </ngx-charts-advanced-pie-chart>
+      </div>
+
+      <div class="mt-5 text-3xl">Yor Stocks</div>
       <table class="mt-5 table-fixed border-collapse border border-slate-900">
         <thead>
         <tr class="bg-slate-900">
-          <th class="cell">Rent Id</th>
-          <th class="cell">Car Id</th>
-          <th class="cell">Date Start</th>
-          <th class="cell">Date End</th>
-          <th class="cell">Price</th>
+          <th class="cell">Stock Symbol</th>
+          <th class="cell">Avg Price</th>
+          <th class="cell">Number of Stocks</th>
+          <th class="cell">Total Value</th>
+          <th class="cell">Tip</th>
+          <th class="cell">Sell</th>
         </tr>
         </thead>
         <tbody class="bg-slate-700">
-        <tr *ngFor="let rent of rents">
-          <td class="cell">{{rent._id}}</td>
-          <td class="cell">{{rent.carId}}</td>
-          <td class="cell">{{rent.start.toString().split("T")[0]}}</td>
-          <td class="cell">{{rent.end.toString().split("T")[0]}}</td>
-          <td class="cell">{{rent.price}}</td>
+        <tr *ngFor="let rent of rents; let i = index">
+          <td class="cell">{{rent.symbol}}</td>
+          <td class="cell">{{rent.averagePrice}}</td>
+          <td class="cell">{{rent.numberOfStocks}}</td>
+          <td class="cell">{{rent.totalValue}}</td>
+          <td class="cell">
+            <button (click)="tip(rent.symbol)" class="bg-slate-600 mt-2 mb-2 pl-3 pr-3 rounded">Get tip</button>
+          </td>
+          <td class="cell">
+            <div class="flex flex-row mt-2 mb-2">
+              <div>
+                <input [(ngModel)]="numberOfStocks[i]" class="w-36 input mr-3" type="number" placeholder="Number of stocks"/>
+              </div>
+              <button (click)="sell(i)" class="bg-slate-600 pl-3 pr-3 rounded">Sell</button>
+            </div>
+
+          </td>
         </tr>
 
         <tr>
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
           <td class="pr-5">Total: {{this.total}}</td>
+          <td></td>
+          <td></td>
         </tr>
 
         </tbody>
       </table>
+
+      <div *ngIf="state1 == 1" class="flex justify-center pt-10">
+        <ngx-charts-bar-vertical-stacked
+          [view]="view"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [results]="multi"
+        >
+        </ngx-charts-bar-vertical-stacked>
+      </div>
+
+      <div class="text-2xl">Achievements</div>
+
     </div>
 
   </div>

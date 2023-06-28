@@ -1,22 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-
-interface Car {
-  _id: string,
-  plateNumber: string
-  model: string
-  manufacturer: string
-  year: number
-  color:string
-  price:number
-  type: string
-  images: [string]
-}
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 interface ResT {
-  message: string
-  data: [Car]
-  hasNext: boolean
+  description: string
+  displaySymbol: string
+  symbol: string
+  type: string
+}
+
+interface ResT1 {
+  count: number
+  result: [ResT]
 }
 
 @Component({
@@ -24,65 +19,82 @@ interface ResT {
   templateUrl: './cars.component.html',
   styleUrls: ['./cars.component.css']
 })
+
 export class CarsComponent implements OnInit {
   state = 0
-  data: [Car] | null = null
-  page = 1
-  hasNext = false
+  data1: [ResT] | null = null
+  data: [ResT] | null = null
+  page = 1;
+  hasNext = true;
+  search : any = null
 
-  start: Date | null = null
-  end: Date | null = null
-
-
-  filter = {
-    manufacturer: "",
-    startPrice: 0,
-    endPrice: 0
-  }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
-    let p = localStorage.getItem('start')
-    let d = localStorage.getItem('end')
-     if (p != null && d != null) {
-       this.start = new Date(p)
-       this.end = new Date(d)
-     }
+    this.search = this.router.getCurrentNavigation()?.extras?.state
   }
 
   ngOnInit(): void {
     this.get()
   }
 
-  prev() {
-    if (this.page >= 1) {
-      this.page -= 1
-      this.get()
-    }
-  }
-
-  next() {
-    this.page += 1
-    this.get()
-  }
-
   get() {
-    let queryParams = new HttpParams();
-    console.log(this.filter)
-    if (this.start != null && this.end != null) {
-      queryParams = queryParams.append("start",this.start.toDateString())
-      queryParams = queryParams.append("end",this.start.toDateString())
+    if (this.search == null) {
+      this.http.get('https://finnhub.io/api/v1/stock/symbol?exchange=US&token=ci9ivrhr01qtqvvf2q70ci9ivrhr01qtqvvf2q7g').subscribe(res => {
+        this.data1 = res as [ResT]
+        this.data1 = this.data1.sort((a,b) => {
+          return a.description > b.description ? -1 : 1
+        })
+        // @ts-ignore
+        this.data = this.data1.slice(0,20)
+        console.log(this.data)
+        this.state = 1
+      })
+      return
     }
-    queryParams = queryParams.append("filter", JSON.stringify(this.filter))
-
-    this.http.get(`http://localhost:3001/cars/${this.page}`, {params: queryParams}).subscribe(res => {
-      let result = res as ResT
-      this.data = result.data
+    console.log("XD")
+    this.http.get(`https://finnhub.io/api/v1/search?q=${this.search}&token=ci9ivrhr01qtqvvf2q70ci9ivrhr01qtqvvf2q7g`).subscribe(res => {
+      this.data1 = (res as ResT1).result
+      // @ts-ignore
+      this.data1 = this.data1.filter( e => {
+        return e.type.length > 0
+      })
+      // @ts-ignore
+      this.data = this.data1.slice(0,20)
       this.state = 1
-      this.hasNext = result.hasNext
     })
 
   }
 
+  prev() {
+    if (this.page == 1)
+      return
+    this.page -= 1
+    // @ts-ignore
+    this.data = this.data1?.slice((this.page - 1) * 20, this.page * 20)
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  next() {
+    // @ts-ignore
+    if (this.data?.length < 20) {
+      return
+    }
+    this.page += 1
+    // @ts-ignore
+    this.data = this.data1?.slice((this.page - 1) * 20, this.page * 20)
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

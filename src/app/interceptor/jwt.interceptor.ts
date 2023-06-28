@@ -13,9 +13,10 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
     let token = localStorage.getItem('token')
     console.log(token)
-    if (token != null) {
+    if (token != null && request.url.includes("localhost")) {
     request = request.clone({
       headers: request.headers.set("token", token)
     })

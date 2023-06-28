@@ -1,16 +1,16 @@
 <div class="flex flex-col border-2 rounded-md border-slate-900 shadow-2xl">
 
   <div class="rounded-t-md text-2xl pl-3 bg-slate-900 pt-2 pb-2">
-    {{data.manufacturer}} {{data.model}}
+    {{data.description}}
   </div>
-  <div class="flex justify-center items-center bg-gradient-to-b from-slate-900 to-slate-700">
-    <img class="h-48 w-96 object-contain" src="http:\\localhost:3001\{{data.images[0]}}" alt="">
+  <div class="flex justify-center items-center bg-slate-700">
+   <div>Type: {{data.type}}</div>
   </div>
 
   <div class="flex justify-evenly items-center rounded-b-md pt-6 pb-6 bg-slate-700">
-    <div>Price: {{data.price}} $</div>
+    <div>{{data.displaySymbol}}</div>
     <div>
-      <button [routerLink]="['/car', data._id]" class="bg-slate-600 pl-8 pr-8 pt-1 pb-1 rounded">More Info</button>
+      <button [routerLink]="['/car', JSON.stringify(data)]" class="bg-slate-600 pl-8 pr-8 pt-1 pb-1 rounded">More Info</button>
     </div>
   </div>
 </div>

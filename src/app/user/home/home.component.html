@@ -2,39 +2,29 @@
 
   <div class="bg-slate-700 text-slate-100 p-10 shadow-2xl rounded-md border-2 border-slate-950">
     <div class="text-2xl pb-2">
-      Best Rent-a-Car web site on internet
+      Best Trading web site on internet
     </div>
 
     <div class="text-2xl">
       We offer:
       <ul class="text-xl mt-1 list-disc ml-8 text-slate-100">
-        <li>Best cars</li>
-        <li>Lowest prices</li>
-        <li>From low end - to high end cars</li>
+        <li>Stocks</li>
+        <li>Bonds</li>
+        <li>Currencies</li>
+        <li>Crypto</li>
       </ul>
     </div>
-
-    <div class="text-2xl mt-3">
-    Call us for more information <br/>
-    +38269111234
-    </div>
-
   </div>
 
   <div class="bg-slate-700 text-slate-100 rounded-md border-2 border-slate-950">
-    <div class="bg-slate-900 pt-3 pb-3 pl-2 text-3xl font-medium shadow-2xl rounded-t-md">Book a car </div>
+    <div class="bg-slate-900 pt-3 pb-3 pl-2 text-3xl font-medium shadow-2xl rounded-t-md">Search stocks</div>
     <div class="w-96 pl-10 pt-6 pr-10">
       <div class="m-4">
-        Start date: <br/>
-        <input  [(ngModel)]="start" class="w-48 input" type="date" data-date-format="dd/mm/yyyy" placeholder="Select Start Date"/>
-      </div>
-      <div class="m-4">
-        End date: <br/>
-        <input  [(ngModel)]="end" class="w-48 input" type="date" data-date-format="dd/mm/yyyy" placeholder="Select End Date"/>
+        Name: <br/>
+        <input  [(ngModel)]="start" class="w-48 input" type="text" placeholder="Stock Name"/>
       </div>
       <button (click)="search()" class="ml-4 mt-2 mb-12 bg-slate-600 pt-2 pb-2 pl-4 pr-4 rounded">Search</button>
     </div>
-
   </div>
 
 

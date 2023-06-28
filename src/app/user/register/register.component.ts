@@ -65,11 +65,12 @@ export class RegisterComponent {
 
     } else {
       let data = {
-         email: this.state.email,
-         password: sha256(this.state.password),
-         firstName: this.state.firstName,
-         lastName: this.state.lastName,
-         phoneNumber: this.state.phoneNumber
+        email: this.state.email,
+        password: sha256(this.state.password),
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        phoneNumber: this.state.phoneNumber,
+        money: 10000
       }
       this.http.post("http://localhost:3001/register",data).subscribe(res => {
         let result = res as ResT
